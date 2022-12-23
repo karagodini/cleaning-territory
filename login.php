@@ -1,6 +1,6 @@
 <?php
 session_start();
-$pass='123'; // Пароль для входа в CMS
+$pass='123456'; // Пароль для входа в CMS
 $adm=0; // Если в переменной $adm==1 то мы успешно авторизованы
 
 if((isset($_POST['slovo'])||isset($_POST['sekret']))||($_SESSION['sekret']==md5($pass))){
@@ -19,7 +19,7 @@ if((isset($_POST['slovo'])||isset($_POST['sekret']))||($_SESSION['sekret']==md5(
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			</head>
 			<body>
-			<center><form method="POST" action="cmsland.php" style="margin-top: 30px;">
+			<center><form method="POST" action="login.php" style="margin-top: 30px;">
 			<div style="background: linear-gradient(white, gray 68%, gray, black); color: black; width: 500px; height: 100px; line-height: 100px; font-size: 24px; letter-spacing: 1px;">Панель администратора</div>
 			<input type="text" placeholder="Введите пароль" name="slovo" size="100" style="margin-top: 10px; background: #eee; color: black; font-size: 18px; width: 494px; height: 30px; line-height: 30px; "><br>
 			<input type=submit name="save" value="Войти в систему" style="width: 340px; background: linear-gradient(#FB9575, #F45A38 48%, #EA1502 52%, #F02F17); color: white; width: 505px; margin-top: 5px; font-size: 16px; display: block; height: 37px; line-height: 25px; text-decoration: none; cursor: pointer; border-radius: 5px; box-shadow: 0px 0px 15px #eee; letter-spacing: 0.5px; vertical-align: middle; text-align: center; text-decoration: none; text-shadow: 0 -1px 1px #777; border: 2px solid #F64C2B; border-radius: 5px; box-shadow: 0 0 0 60px rgba(0,0,0,0) inset, .1em .1em .2em #800;">
@@ -129,7 +129,7 @@ a {
 </head>
 <body>
 <div id="menu">
-<form action="cmsland.php" id="myform" method="POST">
+<form action="login.php" id="myform" method="POST">
 <select name="pagename">');
 // Создаем список страниц в корневой папке доступных для редактирования
 $filelist1 = glob("*.html");
@@ -158,12 +158,12 @@ echo($ssss);
 echo('</select>
 <input type="submit" value="Редактировать" title="Редактировать">
 </form>
-<a href="cmsland.php?mode=0">Тексты</a>
-<a href="cmsland.php?mode=7">Картинки</a>
-<a href="cmsland.php?mode=5">HTML</a>
-<a href="cmsland.php?mode=8">CSS и JS</a>
+<a href="login.php?mode=0">Тексты</a>
+<a href="login.php?mode=7">Картинки</a>
+<a href="login.php?mode=5">HTML</a>
+<a href="login.php?mode=8">CSS и JS</a>
 <a href="index.html" target="_blank">На сайт</a>
-<a href="cmsland.php">Помощь</a>
+<a href="login.php">Помощь</a>
 </div>
 ');
 
@@ -175,7 +175,7 @@ if($_GET['mode']=='7'){
 	preg_match_all($imgreg, $template, $imgmas);
 	for ($j=0; $j< count($imgmas[1]); $j++) {
 		$imgname=trim($imgmas[1][$j]);
-		echo('<div class="kartinka"><a href="cmsland.php?mode=1&img='.$imgname.'"><img src="'.$imgname.'?'.rand(1, 32000).'"></a><br>'.$imgname.'<br>');
+		echo('<div class="kartinka"><a href="login.php?mode=1&img='.$imgname.'"><img src="'.$imgname.'?'.rand(1, 32000).'"></a><br>'.$imgname.'<br>');
 		if(file_exists($imgname)){
 			$size = getimagesize ($imgname); echo "Размер картинки: $size[0] * $size[1]"."<p>";
 		} else { echo("Картинка не загружена"); };
@@ -196,7 +196,7 @@ if($_GET['mode']=='7'){
 		preg_match_all($imgreg, $template, $imgmas);
 		for ($j=0; $j< count($imgmas[1]); $j++) {
 			$imgname=trim($imgmas[1][$j]);
-			echo('<div class="kartinka"><a href="cmsland.php?mode=1&img='.$imgname.'"><img src="'.$imgname.'?'.rand(1, 32000).'"></a><br>'.$imgname.'<br>');
+			echo('<div class="kartinka"><a href="login.php?mode=1&img='.$imgname.'"><img src="'.$imgname.'?'.rand(1, 32000).'"></a><br>'.$imgname.'<br>');
 			if(file_exists($imgname)){
 				$size = getimagesize ($imgname); echo "Размер картинки: $size[0] * $size[1]"."<p>";
 			} else { 
@@ -228,7 +228,7 @@ if($_GET['mode']=='1'){
 			echo("Картинка не загружена"); 
 		};		
 	};
-	echo('<form enctype="multipart/form-data" action="cmsland.php?mode=2&img='.$imgname.'" method="POST">Загрузить картинку с компьютера: <p><input name="userfile" type="file" required><p><input type="submit" style="width: 250px; height: 40px;" value="Начать загрузку" /></form>');	
+	echo('<form enctype="multipart/form-data" action="login.php?mode=2&img='.$imgname.'" method="POST">Загрузить картинку с компьютера: <p><input name="userfile" type="file" required><p><input type="submit" style="width: 250px; height: 40px;" value="Начать загрузку" /></form>');	
 };
 
 
@@ -237,7 +237,7 @@ if($_GET['mode']=='1'){
 if($_GET['mode']=='2'){
 	$imgname=$_GET['img'];
 	if (move_uploaded_file($_FILES['userfile']['tmp_name'], $imgname)) {
-		echo "<br><br><center>Файл был успешно загружен.<p><a href='cmsland.php'>Вернуться к списку картинок</a><p>ПРИ ПРОСМОТРЕ ИЗМЕНЕНИЙ НА САЙТЕ НЕ ЗАБУДЬТЕ ОБНОВИТЬ ЕГО СТРАНИЦУ В БРАУЗЕРЕ";
+		echo "<br><br><center>Файл был успешно загружен.<p><a href='login.php'>Вернуться к списку картинок</a><p>ПРИ ПРОСМОТРЕ ИЗМЕНЕНИЙ НА САЙТЕ НЕ ЗАБУДЬТЕ ОБНОВИТЬ ЕГО СТРАНИЦУ В БРАУЗЕРЕ";
 	};
 };
 
@@ -249,7 +249,7 @@ if($_GET['mode']=='0'){
 	$ff=array(); $content=preg_replace('/<[^>]+>/', '^', $template); $teksta = explode('^', $content);
 	for ($j=0; $j< count($teksta); $j++) { if(strlen(trim($teksta[$j]))>1) $ff[]=(trim($teksta[$j])); };
 	for ($j=0; $j< count($ff); $j++) { 
-		echo('<a href="cmsland.php?mode=3&j='.$j.'" class="mytext">'.$ff[$j].'</a>');
+		echo('<a href="login.php?mode=3&j='.$j.'" class="mytext">'.$ff[$j].'</a>');
 	};
 };
 
@@ -266,7 +266,7 @@ if($_GET['mode']=='3'){
 	for ($j=0; $j<$jj; $j++) { 
 		$kol=$kol + substr_count($ff[$j],$tektekst);
 	};
-	echo('<div style="margin: 0 auto; text-align: center;"><form method="POST" action="cmsland.php?mode=4&j='.$jj.'"><br><br><h2>Редактирование текстового фрагмента</h2><br><br><textarea name="mytext">'.$tektekst.'</textarea><br><input style="width: 600px; margin-top: 10px; height: 50px;" type="submit" value="Заменить текст" title="Заменить текст"></form></div>');
+	echo('<div style="margin: 0 auto; text-align: center;"><form method="POST" action="login.php?mode=4&j='.$jj.'"><br><br><h2>Редактирование текстового фрагмента</h2><br><br><textarea name="mytext">'.$tektekst.'</textarea><br><input style="width: 600px; margin-top: 10px; height: 50px;" type="submit" value="Заменить текст" title="Заменить текст"></form></div>');
 };
 
 
@@ -293,7 +293,7 @@ if($_GET['mode']=='4'){
 	};
 	$rez=str_replace_nth($tektekst, $_POST['mytext'], $subject, $kol-1);
 	file_put_contents($pagename, $rez);
-	echo "<br><br><center>Текст был успешно изменен.<p><a href='cmsland.php?mode=0'>Вернуться к списку текстов</a><p>ПРИ ПРОСМОТРЕ ИЗМЕНЕНИЙ НА САЙТЕ НЕ ЗАБУДЬТЕ ОБНОВИТЬ ЕГО СТРАНИЦУ В БРАУЗЕРЕ";
+	echo "<br><br><center>Текст был успешно изменен.<p><a href='login.php?mode=0'>Вернуться к списку текстов</a><p>ПРИ ПРОСМОТРЕ ИЗМЕНЕНИЙ НА САЙТЕ НЕ ЗАБУДЬТЕ ОБНОВИТЬ ЕГО СТРАНИЦУ В БРАУЗЕРЕ";
 };
 
 
@@ -301,7 +301,7 @@ if($_GET['mode']=='4'){
 // Форма для HTML кода
 if($_GET['mode']=='5'){
 	$template=htmlspecialchars(file_get_contents($pagename));
-	echo('<div style="margin: 0 auto; text-align: center;"><form method="POST" action="cmsland.php?mode=6"><br><br><h2>Редактирование HTML кода</h2><br><br><textarea name="mytext" style="width: 90%; height: 500px;">'.$template.'</textarea><br><input style="width: 90%; margin-top: 10px; height: 50px;" type="submit" value="Заменить текст" title="Заменить текст"></form></div>');
+	echo('<div style="margin: 0 auto; text-align: center;"><form method="POST" action="login.php?mode=6"><br><br><h2>Редактирование HTML кода</h2><br><br><textarea name="mytext" style="width: 90%; height: 500px;">'.$template.'</textarea><br><input style="width: 90%; margin-top: 10px; height: 50px;" type="submit" value="Заменить текст" title="Заменить текст"></form></div>');
 };
 
 
@@ -320,7 +320,7 @@ if($_GET['mode']=='8'){
 	for ($j=0; $j< count($cssmas[1]); $j++) {
 	$rrr=trim($cssmas[1][$j]);
 	if (!(strstr($rrr, "http"))) {
- 	echo('<a class="cssjs" href="cmsland.php?mode=9&fl='.$rrr.'">'.$rrr.'</a><p>');
+ 	echo('<a class="cssjs" href="login.php?mode=9&fl='.$rrr.'">'.$rrr.'</a><p>');
 	};
 	};
 	$cssreg = "/[\"']((.*\\/\\/|)([\\/a-z0-9_%]+\\.(js)))[\"']/"; 
@@ -328,7 +328,7 @@ if($_GET['mode']=='8'){
 	for ($j=0; $j< count($cssmas[1]); $j++) {
 	$rrr=trim($cssmas[1][$j]);
 	if (!(strstr($rrr, "http"))) {
-	echo('<a class="cssjs"  href="cmsland.php?mode=9&fl='.$rrr.'">'.$rrr.'</a><p>');
+	echo('<a class="cssjs"  href="login.php?mode=9&fl='.$rrr.'">'.$rrr.'</a><p>');
 	};
 	};
 };
@@ -337,7 +337,7 @@ if($_GET['mode']=='8'){
 // Форма для HTML кода
 if($_GET['mode']=='9'){
 	$template=htmlspecialchars(file_get_contents($_GET['fl']));
-	echo('<div style="margin: 0 auto; text-align: center;"><form method="POST" action="cmsland.php?mode=10&fl='.$_GET['fl'].'"><br><br><h2>Редактирование кода</h2><br><br><textarea name="mytext" style="width: 90%; height: 500px;">'.$template.'</textarea><br><input style="width: 90%; margin-top: 10px; height: 50px;" type="submit" value="Заменить текст" title="Заменить текст"></form></div>');
+	echo('<div style="margin: 0 auto; text-align: center;"><form method="POST" action="login.php?mode=10&fl='.$_GET['fl'].'"><br><br><h2>Редактирование кода</h2><br><br><textarea name="mytext" style="width: 90%; height: 500px;">'.$template.'</textarea><br><input style="width: 90%; margin-top: 10px; height: 50px;" type="submit" value="Заменить текст" title="Заменить текст"></form></div>');
 };
 
 //******************************************************************************************
@@ -349,7 +349,7 @@ if($_GET['mode']=='10'){
 //******************************************************************************************
 // Помощь
 if(!isset($_GET['mode'])){
-	echo('<div id="help"><p><br><h2>CMSLAND (версия 0.1)</h2><p>Данная CMS состоит всего из одного файла cmsland.php и предназначена для управления уже готовыми лэндингами, состоящими из HTML страницы, и подключенных к ней CSS файлов.<p>	С помощью данной CMS вы можете редактировать текста, и заменять картинки, изменять HTML код, JS и CSS вашего лэндинга.<p>CMS не требует установки, достаточно положить ее файл в папку рядом с файлом index.html<p>Разработано в 2017 году Иваном Сараевым (<a href="http://pythono.ru">pythono.ru</a>) в качестве мини-админки для лэндингов.</div>');
+	echo('<div id="help"><p><br><h2>CMSLAND (версия 0.1)</h2><p>Данная CMS состоит всего из одного файла login.php и предназначена для управления уже готовыми лэндингами, состоящими из HTML страницы, и подключенных к ней CSS файлов.<p>	С помощью данной CMS вы можете редактировать текста, и заменять картинки, изменять HTML код, JS и CSS вашего лэндинга.<p>CMS не требует установки, достаточно положить ее файл в папку рядом с файлом index.html<p>Разработано в 2017 году Иваном Сараевым (<a href="http://pythono.ru">pythono.ru</a>) в качестве мини-админки для лэндингов.</div>');
 };
 
 echo('</body></html>');
