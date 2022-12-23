@@ -387,8 +387,106 @@ html {
     color: #A0EE3C;
   }
 
+  .faq {
+    background: url(images/faq-bg.png) no-repeat;
+    background-position: left;
+  }
+
   .faq-btns {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .faq-btns a {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    color: #000000;
+    padding: 25px 30px;
+    margin: 0 11px;
+    background: #D9D9D9;
+    border-radius: 40px;
+    text-decoration: none;
+  }
+
+  .faq-wa {
+    padding: 20px 30px !important;
+  }
+
+  footer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    margin-top: 70px;
+  }
+
+  .footer-contact {
+    margin-left: 80px;
+  }
+
+  footer::after {
+    content: '';
+    background: rgba(150, 180, 56, 0.5);
+    height: 2px;
+    width: 100%;
+    top: 0;
+    position: absolute;
+  }
+
+  footer p {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
+  }
+
+  .footer-icons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .footer-icons img {
+    margin-right: 14px;
+  }
+
+  .footer-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .footer-nav a {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: #000000;
+    text-decoration: none;
+    margin: 0 20px;
+  }
+
+  .footer {
+    margin-left: 260px;
+  }
+
+  .footer p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+    color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
   }
