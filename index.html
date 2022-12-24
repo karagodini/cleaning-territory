@@ -20,11 +20,27 @@
         <div class="header-menu">
             <p>c-garden</p>
             <div class="menu">
-                <a href="">Зимние услуги</a>
-                <a href="">Летние услуги</a>
-                <a href="">Наши работы</a>
-                <a href="">Отзывы</a>
-                <a href="">Контакты</a>
+                <a href="#winder">Зимние услуги</a>
+                <a href="#summer">Летние услуги</a>
+                <a href="#examples">Наши работы</a>
+                <a href="#reviews">Отзывы</a>
+                <a href="#contact">Контакты</a>
+            </div>
+        </div>
+        <div class="header-mob">
+            <p>c-garden</p>
+            <div class="header-mob-container">
+                <img class="header-mob-tel" src="images/mob-tel.png" alt="">
+                <a href="" class="header-mob-btn">
+                    <img src="images/mob-nav-btn.png" alt="">
+                    
+                </a>
+                <div class="header-mob-nav">
+                    <a href="#winder">Зимние услуги</a>
+                    <a href="#summer">Летние услуги</a>
+                    <a href="#examples">Наши работы</a>
+                    <a href="#contact">Контакты</a>
+                </div>
             </div>
         </div>
         <div class="header-container">
@@ -42,7 +58,7 @@
         </div>
     </header>
     <main>
-        <div class="winter">
+        <div class="winter" id="winter">
             <h1>Зимние услуги</h1>
             <div class="blocks">
                 <div class="block-1">
@@ -65,7 +81,7 @@
                 </div>
             </div>
         </div>
-        <div class="summer">
+        <div class="summer" id="summer">
             <h1>Летние услуги</h1>
             <div class="blocks">
                 <div class="block-1 summer-block-1">
@@ -94,12 +110,12 @@
                 <h1 class="title"><span>Акция</span> в Чеховском районе!</h1>
                 <h1 class="title">Чистка снега (крыльцо+дорожка+машиноместо) 3000р</h1>
                 <h2 class="sub">Пенсионерам и постоянным клиентам предусмотренны скидки от 5 до 20%</h2>
-                <a href="" class="header-btn">Заказать</a>
+                <a href="" class="header-btn stock-mob-btn">Заказать</a>
             </div>
             <img class="stock-img" src="images/srock-img.png" alt="">
         </div>
         <img class="bg-img" src="images/bg.png" alt="">
-        <div class="reviews">
+        <div class="reviews" id="reviews">
             <h1>Отзывы наших клиентов</h1>
             <div class="reviews-blocks">
                 <div class="reviews-block">
@@ -117,12 +133,12 @@
         <div class="examples">
             <h1>Примеры работ</h1>
             <div class="examples-img">
-                <img src="images/examples-1.png" alt="">
-                <img src="images/examples-2.png" alt="">
-                <img src="images/examples-3.png" alt="">
+                <img class="examples-mob1" src="images/examples-1.png" alt="">
+                <img class="examples-mob" src="images/examples-2.png" alt="">
+                <img class="examples-mob" src="images/examples-3.png" alt="">
             </div>
         </div>
-        <div class="contact">
+        <div class="contact" id="contact">
             <h1>Контакты</h1>
             <img src="images/contact-img.png" alt="">
         </div>
@@ -158,5 +174,6 @@
             <p>Copyright © 2022 Уборка загородных территорий</p>
         </div>
     </footer>
+    <script src="index.js"></script>
 </body>
 </html>
